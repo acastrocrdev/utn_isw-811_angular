@@ -1,0 +1,146 @@
+<section *ngIf="showContent" class="topMembers py-5">
+  <div class="container mb-5">
+    <nav class="" aria-label="breadcrumb">
+      <ol class="breadcrumb pl-0 justify-content-center">
+        <li class="breadcrumb-item">
+          <a routerLink="/home">Inicio</a>
+        </li>
+        <li class="breadcrumb-item">
+          <a routerLink="/ubicaciones">Ubicaciones</a>
+        </li>
+        <li class="active breadcrumb-item" aria-current="page">{{location.name}}</li>
+      </ol>
+    </nav>
+    <div class="p-2 mb-2 bg-info text-white">
+      <div class="img-cont">
+        <img class="img-pro" [src]="locationsPath+location.img_bg" [alt]="location.name">
+      </div>
+    </div>
+    <div class="w-100 text-center posTitle">
+      <div class="adj py-1 px-4">
+        <h1 class="my-2">{{location.name}}</h1>
+      </div>
+    </div>
+  </div>
+  <div class="container mt-5">
+    <div class="row p-3">
+      <div class="col-md-5 col-lg-4">
+        <img class="img-thumbnail" [src]="locationsPath+location.img_src" [alt]="location.name">
+      </div>
+      <div class="col-md-7 col-lg-8 pt-4">
+        <div class="mb-3 row text-justify">
+          <em>{{location.resume}}</em>
+        </div>
+        <div class="mb-3 row text-justify">
+          <em>{{location.description}}</em>
+        </div>
+        <div class="clearfix"></div>
+        <div class="mb-3 row">
+          <p class="col-md-4 col-lg-3 pt-1"><b>Como llegar:</b></p>
+          <div class="col-md-8 col-lg-9 text-justify">
+            <a *ngIf="location.waze!='' && location.waze != null" (click)="goToLinkLocation('waze', location)" class="btn
+              btn-twitter text-nowrap mr-1" title="Ir a Waze">
+              <i class="fab fa-waze"></i>
+            </a>
+            <a *ngIf="location.google_maps!='' && location.google_maps != null" (click)="goToLinkLocation('gmaps', location)"
+              class="btn
+              btn-google text-nowrap mr-1" title="Ir a Google Maps">
+              <i class="fas fa-map-marked-alt"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="w-100 text-center posTitle">
+      <div class="adj_title py-1 px-4 mt-5">
+        <h1 class="my-2">Peliculas en cartelera</h1>
+      </div>
+    </div>
+    <div class="row p-3">
+      <div class="mt-4 w-100" *ngFor="let bill of billboard">
+        <div class="card h-100">
+          <div class="card-body text-secondary row">
+            <div class="col-md-3">
+              <span class="fa-layers fa-fw fa-3x icon-classification" title={{movies[bill.movie_id].name}}>
+                <i class="fas fa-certificate"></i>
+                <span class="fa-layers-text fa-inverse" data-fa-transform="shrink-11.5 rotate--30" style="font-weight:900; font-size:1.5em;">{{classification[movies[bill.movie_id].classification_id].code}}</span>
+              </span>
+              <img class="img-thumbnail" [src]="moviesPath+movies[bill.movie_id].img_src" [alt]="movies[bill.movie_id].name">
+              <div class="text-center mt-4">
+                <a *ngIf="movies[bill.movie_id].facebook_id!='' && movies[bill.movie_id].facebook_id != null"
+                  (click)="goToLink('face', movies[bill.movie_id])" class="btn btn-facebook text-nowrap mr-1" title="Ir al Facebook">
+                  <i class="fab fa-facebook-f"></i>
+                </a>
+                <a *ngIf="movies[bill.movie_id].instagram_id!='' && movies[bill.movie_id].instagram_id != null"
+                  (click)="goToLink('inst', movies[bill.movie_id])" class="btn btn-instagram text-nowrap mr-1" title="Ir al Instagram">
+                  <i class="fab fa-instagram"></i>
+                </a>
+                <a *ngIf="movies[bill.movie_id].twitter_id!='' && movies[bill.movie_id].twitter_id != null"
+                  (click)="goToLink('twit', movies[bill.movie_id])" class="btn btn-twitter text-nowrap mr-1" title="Ir al Twitter">
+                  <i class="fab fa-twitter"></i>
+                </a>
+                <a *ngIf="movies[bill.movie_id].site!='' && movies[bill.movie_id].site != null" (click)="goToLink('page', movies[bill.movie_id])"
+                  class="btn btn-info text-nowrap mr-1 text-white" title="Ir al Sitio Web">
+                  <i class="fas fa-link"></i>
+                </a>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <a href="#" class="card__play">
+                <i class="icon ion-ios-play"></i>
+              </a>
+              <h3 class="card__title my-2">
+                <a href="#">{{movies[bill.movie_id].name}}</a>
+              </h3>
+              <h6 class="my-2" *ngIf="movies[bill.movie_id].resume!=''">{{movies[bill.movie_id].resume}}</h6>
+              <p class="text-justify"><em>{{movies[bill.movie_id].synopsis}}</em></p>
+              <div class="row">
+                <span class="card__category col-md-6">
+                  <button *ngIf="movies[bill.movie_id].trailer != null && movies[bill.movie_id].trailer!==''" type="button" class="btn btn-outline-success btn-sm mr-2 col-12"
+                    data-target="#movie-preview"
+                    (click)="viewTrailer(movies[bill.movie_id])">
+                    <i class="fas fa-film"></i>
+                    &nbsp;&nbsp;Ver Trailer
+                  </button>
+                  <button *ngIf="movies[bill.movie_id].teaser != null && movies[bill.movie_id].teaser!==''" type="button" class="btn btn-outline-info btn-sm col-12 mt-2"
+                    data-target="#movie-preview"
+                    (click)="viewTeaser(movies[bill.movie_id])">
+                    <i class="fas fa-video"></i>
+                    &nbsp;&nbsp;Ver Teaser
+                  </button>
+                </span>
+                <div class="col-md-6">
+                  <p><b>Fecha / Hora: </b>{{bill.date | date:'d-M-y'}} / {{'2000/01/01 ' + bill.time | date:'shortTime'}}</p>
+                  <p><b>Ubicación: </b>{{location.name}}</p>
+                </div>
+                <div class="col-6 mt-4" *ngIf="currentUser != null">
+                  <div class="" *ngIf="bill.sales_enable == 1">
+                    <button class="btn btn-outline-dark btn-lg btn-block" type="button" (click)="gotoCartelera(bill.id, location.id, movies[bill.movie_id].id)">
+                      <i class="fas fa-sign-in-alt mr-3"></i> Reservar tiquetes
+                    </button>
+                  </div>
+                  <div class="mt-2 mb-0" *ngIf="bill.sales_enable == 0">
+                    <h4>Venta temporalmente suspendida</h4>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <button class="btn btn-outline-primary btn-lg btn-block mt-4" type="button"
+                    [routerLink]="['/peliculas/', movies[bill.movie_id].id]">
+                    <i class="fas fa-ticket-alt"></i>
+                    &nbsp;&nbsp;Ver detalles
+                  </button>
+                </div>
+                <div class="col-6" *ngIf="currentUser == null">
+                  <button class="btn btn-outline-dark btn-lg btn-block mt-4" type="button" (click)="showLogin(location.id)">
+                    <i class="fas fa-sign-in-alt mr-3"></i> Inicie sesión para reservar
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,8 @@
+.card-body .img-thumbnail {
+	width: 90%;
+	height: 175px;
+}
+
+app-rating {
+	display: block;
+}

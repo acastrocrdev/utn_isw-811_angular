@@ -1,0 +1,173 @@
+<!-- <ng-container *ngIf="showContent"> -->
+<section class="topMembers py-5">
+  <div class="container mb-5">
+    <nav class="" aria-label="breadcrumb">
+      <ol class="breadcrumb pl-0 justify-content-center">
+        <li class="breadcrumb-item">
+          <a routerLink="/home">Inicio</a>
+        </li>
+        <li class="breadcrumb-item">
+          <a *ngIf="showContent" routerLink="/cartelera/{{billboard.locations.id}}">Cartelera de {{billboard.locations.name}}</a>
+        </li>
+        <li *ngIf="showContent" class="active breadcrumb-item" aria-current="page">Reservar pelicula {{billboard.movies.name}}</li>
+      </ol>
+    </nav>
+    <div class="p-2 mb-2 bg-info text-white">
+      <div class="img-cont">
+        <img *ngIf="showContent" class="img-pro" [src]="moviesPath + billboard.movies.img_src_bd" [alt]="billboard.movies.name">
+      </div>
+    </div>
+    <div class="w-100 text-center posTitle">
+      <div class="adj py-1 px-4">
+        <h1 *ngIf="showContent" class="my-2">{{billboard.movies.name}}</h1>
+      </div>
+    </div>
+  </div>
+  <div class="container mt-5">
+    <div class="row p-3">
+      <div class="col-md-5 col-lg-4">
+        <img *ngIf="showContent" class="img-thumbnail" [src]="moviesPath+billboard.movies.img_src" [alt]="billboard.movies.name">
+        <div class="mb-3 row">
+          <div class="col-md-5 col-lg-3"><b>Fecha: </b></div>
+          <div *ngIf="showContent" class="col-md-8 col-lg-9 text-justify"><em>{{billboard.date | date:'d-M-y'}}</em></div>
+        </div>
+        <div class="mb-3 row">
+          <div class="col-md-5 col-lg-3"><b>Hora: </b></div>
+          <div *ngIf="showContent" class="col-md-8 col-lg-9 text-justify"><em>{{'2000/01/01 ' +billboard.time | date:'shortTime'}}</em></div>
+        </div>
+        <div class="mb-3 row">
+          <div class="col-md-5 col-lg-3"><b>Ubicación: </b></div>
+          <div *ngIf="showContent" class="col-md-8 col-lg-9 text-justify"><em>{{billboard.locations.name}}</em></div>
+        </div>
+        <div class="mb-3 row">
+          <div class="col-md-5 col-lg-3"><b>Duración: </b></div>
+          <div *ngIf="showContent" class="col-md-8 col-lg-9 text-justify"><em>{{duration(billboard.movies.duration)}}</em></div>
+        </div>
+      </div>
+      <div class="col-md-7 col-lg-8">
+        <div class="mb-3 row">
+          <h3 class="col-12 text-center mb-3">Localidades disponibles</h3>
+          <!-- <div *ngIf="initTables"> -->
+          <table id="dtList" class="table table-striped table-bordered table-sm row-border hover mt-2 select_ext mb-3">
+            <thead>
+              <tr>
+                <th class="per_40">Localidad</th>
+                <th class="per_10">Valor</th>
+                <th class="per_10">Disponibles</th>
+                <th class="per_20">Cantidad</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let tick of ticket" id="{{tick.id}}">
+                <td>{{ tick.name }}</td>
+                <td>{{ tick.amount | currency: '¢' }}</td>
+                <td>{{ (tick.availabe - tick.currentSold ) }}</td>
+                <td>
+                  <input id="name_{{tick.id}}" name="name_{{tick.id}}" type="number" min="0" max="{{(tick.availabe - tick.currentSold)}}" class="form_input"
+                    placeholder="Cantidad" [(ngModel)]="tick.total" (change)="updateAmount(tick)">
+                  <span *ngIf="(tick.availabe - tick.currentSold) <tick.total"class="text-danger">No se puede digitatr una cantidad mayor a la disponible</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- </div> -->
+        </div>
+        <div class="clearfix"></div>
+      </div>
+      <div class="clearfix"></div>
+      <div class="col-12 mb-3 mt-5 row">
+
+        <h3 class="col-12 text-center mb-3 mt-5">Agrega extras a tu reserva</h3>
+        <!-- <div *ngIf="initTables"> -->
+        <table id="dtList_2" class="table table-striped table-bordered table-sm row-border hover mt-2 select_ext mb-0">
+          <thead>
+            <tr>
+              <th class="per_20">Nombre</th>
+              <th class="per_30">Descripción</th>
+              <th class="per_10">Valor</th>
+              <th class="per_20">Cantidad</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let prod of products" id="{{prod.id}}">
+              <td>{{ prod.name }}</td>
+              <td>{{ prod.description }}</td>
+              <td>{{ prod.amount | currency: '¢' }}</td>
+              <td>
+                <input id="name_{{prod.id}}" name="name_{{prod.id}}" type="number" min="0" max="50" class="form_input"
+                  placeholder="Cantidad" [(ngModel)]="prod.total" (change)="updateAmountProd(prod)">
+                <span *ngIf="50 <prod.total"class="text-danger">No se puede adquirir más de 50 productos</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <!-- </div> -->
+      </div>
+      <div class="col-12" *ngIf="showContent && haveItems">
+        <h4>Resumen de compra</h4>
+        <p>Si desea eliminar algún item, se realiza en la lista superior</p>
+        <table id="dtList_3" class="table table-striped table-bordered table-sm row-border hover mt-2 select_ext mb-0">
+          <thead>
+            <tr>
+              <th class="per_40 text-center">Descripción</th>
+              <th class="per_15 text-center">Cantidad</th>
+              <th class="per_15 text-center">Costo</th>
+              <th class="per_15 text-center">IVA</th>
+              <th class="per_15 text-center">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let buy of buyList">
+              <td>{{ buy.description}}</td>
+              <td class="text-center">{{ buy.quanty}}</td>
+              <td class="text-center">{{ buy.subtotal | currency: '¢' }}</td>
+              <td class="text-center">{{ buy.iva | currency: '¢' }}</td>
+              <td class="text-center">{{ buy.total | currency: '¢' }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-12 col-lg-8 col-md-6 mb-3 mt-5 row justify-content-left d-block" *ngIf="showContent && haveItems">
+        <p><b>Pelicula:</b> {{billboard.movies.name}}</p>
+        <p><b>Fecha / Hora:</b> {{billboard.date | date:'d-M-y'}} / {{'2000/01/01 ' +billboard.time | date:'shortTime'}}</p>
+        <p><b>Ubicación:</b> {{billboard.locations.name}}</p>
+        <p><b>Por favor verifique que su orden es correcta.</b></p>
+        <p><b>Cuando la compra se finalice, no se puede modificar ni se aceptan cancelaciones.</b></p>
+        <p><b>Muchas gracias por su preferencia</b></p>
+      </div>
+      <div class="col-12 col-lg-4 col-md-6 mb-3 mt-5 row justify-content-end d-block" *ngIf="showContent && haveItems">
+        <div class="mb-3 col-12 row">
+          <div class="col-md-5 col-lg-3"><b>SubTotal: </b></div>
+          <div *ngIf="showContent" class="col-md-8 col-lg-9 text-center"><em>{{subtotal | currency: '¢'}}</em></div>
+        </div>
+        <div class="mb-3 col-12 row">
+          <div class="col-md-5 col-lg-3"><b>IVA: </b></div>
+          <div *ngIf="showContent" class="col-md-8 col-lg-9 text-center"><em>{{taxes | currency: '¢'}}</em></div>
+        </div>
+        <div class="mb-3 col-12 row">
+          <div class="col-md-5 col-lg-3"><b>Total: </b></div>
+          <div *ngIf="showContent" class="col-md-8 col-lg-9 text-center"><em>{{total | currency: '¢'}}</em></div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+    <div class="row p-3 mt-0">
+      <div class="col-6">
+        <button type="button" class="btn btn-outline-primary btn-lg btn-block mt-4" (click)="backPage()">
+          <i class="fas fa-film"></i>
+          &nbsp;&nbsp;
+          Cancelar pedido y volver a la cartelera
+        </button>
+      </div>
+      <div class="col-6" *ngIf="showContent && haveItems">
+        <button type="button" class="btn btn-outline-success btn-lg btn-block mt-4" (click)="saveSale()">
+          <i class="fas fa-calculator"></i>
+          &nbsp;&nbsp;
+          Confirmar Compra
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- </ng-container> -->

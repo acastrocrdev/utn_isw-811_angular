@@ -1,0 +1,20 @@
+<div class="card h-100">
+  <div class="card-body text-body pb-1">
+    <img class="img-thumbnail" [src]="img_src" [alt]="prod.name">
+    <h3 class="card__title my-2">
+      <a href="#">{{prod.name}}</a>
+    </h3>
+    <!-- <p class="text-justify"><em>{{prod.description}}</em></p> -->
+    <!-- <span class="card__category">
+      <span class="badge badge-secondary mr-2" *ngFor="let classi of prod.classification_prod" [attr.data-id]="classi.id" title="{{classi.name}}">{{classi.code}}</span>
+    </span> -->
+  </div>
+  <div class="mt-2 mb-4">
+    <p class="text-center mb-0 text-dark"><em><b>Precio:</b> {{prod.amount | currency: '¢'}}</em></p>
+    <app-rating class="mb-3 text-body text-muted" [to_rating]="'product'" [code]="prod.id" [ranking]="prod.ranking_product_sum" [votes]="prod.ranking_product_count"></app-rating>
+    <button type="button" class="btn btn-outline-success btn-sm mr-2" [routerLink]="['/productos/', prod.id]">
+      <i class="fas fa-hotdog"></i>
+      &nbsp;&nbsp;Ver producto
+    </button>
+  </div>
+</div>

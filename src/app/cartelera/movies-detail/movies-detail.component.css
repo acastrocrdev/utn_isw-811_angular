@@ -1,0 +1,69 @@
+.img-cont {
+  height: 500px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.img-pro {
+  width: inherit;
+  height: inherit;
+}
+
+.posTitle {
+  position: relative;
+  margin-top: -8px;
+  display: flex;
+}
+
+.posTitle .adj {
+  width: 100%;
+  background: #17a2b8a3;
+  margin: auto;
+}
+
+.card-body .img-thumbnail {
+  height: 325px;
+  width: 215px;
+}
+
+.btnsZone {
+  position: relative;
+}
+
+app-rating {
+  display: block;
+}
+
+.external_btns {
+  position: absolute;
+  width: 0px;
+  height: 0px;
+  overflow: hidden;
+  top: -9999px;
+  border-radius: 5px;
+}
+
+.external_btns.active {
+  width: 230px;
+  left: 15px;
+  top: -10px;
+  height: 340px;
+  background: #9999999c;
+}
+
+.bottomPos {
+  position: relative;
+}
+
+.icon-classification {
+  position: absolute;
+  color: #ffc584c4;
+  -webkit-text-fill-color: #000000;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: white;
+  text-shadow: 0 0 17px #fff;
+  stroke: #ff8700;
+  stroke-width: 10;
+  right: 5px;
+  top: -15px;
+}

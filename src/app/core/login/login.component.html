@@ -1,0 +1,77 @@
+<ng-template #login_modal let-modalLogin>
+  <div class="modal-body">
+    <div class="row text-center">
+      <h2 class="w-100 h4 mb-0">Inicio de sesión</h2>
+      <p class="w-100 text-muted mt-3 mb-4">Ingrese sus datos para continuar.</p>
+    </div>
+    <form [formGroup]="form" (ngSubmit)="makeLogin()" novalidate>
+      <!-- user -->
+      <div class="mb-3">
+        <div class="input-group form">
+          <div class="input-group-prepend">
+            <span class="input-group-text bg-light">
+              <i class="fa fa-user"></i>
+            </span>
+          </div>
+          <input type="text" class="form-control" name="user" required="" placeholder="Usuario (Correo electronico)" aria-label="Usuario" formControlName="email">
+        </div>
+        <span *ngIf="errorHandling('email', 'required')" class="text-danger">El usuario es requerido</span>
+      </div>
+      <!-- End user -->
+      <!-- Input -->
+      <div class="mb-3">
+        <div class="input-group form">
+          <div class="input-group-prepend">
+            <span class="input-group-text bg-light">
+              <i class="fa fa-lock"></i>
+            </span>
+          </div>
+          <input type="password" class="form-control" name="password" required="" placeholder="Contraseña" formControlName="password">
+        </div>
+        <span *ngIf="errorHandling('password', 'required')" class="text-danger">La contraseña es requerida</span>
+      </div>
+      <!-- End Input -->
+      <!-- Recovery -->
+      <!-- <div class="row mb-3">
+        <div class="col-12 text-right">
+          <a class="float-right text-success" data-animation-in="fadeIn" con>Recuperar contraseña</a>
+        </div>
+      </div> -->
+      <!-- End Recovery -->
+      <div class="mb-3">
+        <button [disabled]="!form.valid" type="submit" class="btn btn-block btn-lg btn-success">Ingresar</button>
+      </div>
+      <div class="mb-3">
+        <button type="reset" (click)="onReset()" class="btn btn-block btn-secondary">Cancelar</button>
+      </div>
+    </form>
+    <div class="text-center mb-3">
+      <p class="text-muted">
+        ¿No tienes una cuenta?&nbsp;&nbsp;&nbsp;
+        <a (click)="showRegister()" class="text-success" data-animation-in="fadeIn">Registrese
+        </a>
+      </p>
+    </div>
+
+    <!-- Divider -->
+    <div class="text-center my-3 u-divider-wrapper">
+      <span class="u-divider u-divider--xs u-divider--text">Ó</span>
+    </div>
+    <!-- End Divider -->
+
+    <!-- Signin Social Buttons -->
+    <div class="row mb-1">
+      <button type="button" class="btn btn-block btn-facebook text-nowrap" (click)="FacebookAuth()">
+        <i class="fab fa-facebook-f mr-2"></i>
+        Ingresar con Facebook
+      </button>
+    </div>
+    <div class="row mb-1">
+      <button type="button" class="btn btn-block btn-google text-nowrap" (click)="GoogleAuth()">
+        <i class="fab fa-google mr-2"></i>
+        Ingresar con Google
+      </button>
+    </div>
+    <!-- End Signin Social Buttons -->
+  </div>
+</ng-template>

@@ -1,0 +1,40 @@
+<section class="adminZone py-5">
+  <div class="container">
+    <nav class="" aria-label="breadcrumb">
+      <ol class="breadcrumb pl-0 justify-content-center">
+        <li class="active breadcrumb-item" aria-current="page">Lista de reservas</li>
+      </ol>
+    </nav>
+    <div class="row">
+      <div class="col-12 form__cover">
+        <table id="dtList" class="table table-striped table-bordered table-sm row-border hover" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger$">
+          <thead>
+            <tr>
+              <th>Fecha compra</th>
+              <th>Localidad</th>
+              <th>Pelicula</th>
+              <th>Fecha función</th>
+              <th class="options_2">Opciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let res of serverResponse$" id="{{res.id}}">
+              <td>{{ res.created_at | date:'d-M-y / h:mm aaa' }}</td>
+              <td>{{res.loc_name}}</td>
+              <td>{{res.mov_name }}</td>
+              <td>{{res.date | date:'d-M-y'}} / {{'2000/01/01 ' + res.time | date:'shortTime'}}</td>
+              <td>
+                <button type="button" class="btn btn-outline-info btn-sm ml-1" attr.show-element-id="{{res.id}}">
+                  <i class="fas fa-eye"></i>
+                </button>
+                <!-- <button type="button" class="btn btn-outline-danger btn-sm" attr.edit-element-id="{{movs.id}}">
+                  <i class="fas fa-trash-alt"></i>
+                </button> -->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>

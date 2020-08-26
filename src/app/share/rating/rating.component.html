@@ -1,0 +1,29 @@
+<div class="rating row text-center mt-2">
+  <div class="col">
+    <div class="content_r" *ngIf="!vote_send">
+      <span class="mr-4"><b>Calificar:</b></span>
+      <div (mouseover)="makeRating(1)" (click)="makeClick(1)" [ngClass]="prueba >= 1 ? 'rating-select': ''">
+        <span class="fa fa-star rating_movie rating_1"></span>
+      </div>
+      <div (mouseover)="makeRating(2)" (click)="makeClick(2)" [ngClass]="prueba >= 2 ? 'rating-select': ''">
+        <span class="fa fa-star rating_movie rating_2"></span>
+      </div>
+      <div (mouseover)="makeRating(3)" (click)="makeClick(3)" [ngClass]="prueba >= 3 ? 'rating-select': ''">
+        <span class="fa fa-star rating_movie rating_3"></span>
+      </div>
+      <div (mouseover)="makeRating(4)" (click)="makeClick(4)" [ngClass]="prueba >= 4 ? 'rating-select' : ''">
+        <span class="fa fa-star rating_movie rating_4"></span>
+      </div>
+      <div (mouseover)="makeRating(5)" (click)="makeClick(5)" [ngClass]="prueba === 5 ? 'rating-select': ''">
+        <span class="fa fa-star rating_movie rating_5"></span>
+      </div>
+    </div>
+    <div class="content_r" *ngIf="vote_send">
+      <span class="text-success"><b>Calificación enviada:</b> {{prueba}} (Gracias)</span>
+    </div>
+    <div class="w-100 mt-2 mb-3">
+      <span class="mr-2" [ngClass]="vote_send ? 'text-info' :''"><b>Calificación general:</b></span>
+      <span class="ml-1 badge badge-pill badge-info">{{actualRanking}} / 5</span>
+    </div>
+  </div>
+</div>

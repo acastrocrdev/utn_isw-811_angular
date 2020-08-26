@@ -1,0 +1,20 @@
+.img-cont {
+  height: 500px;
+}
+
+.img-pro {
+  width: -webkit-fill-available;
+  height: -webkit-fill-available;
+}
+
+.posTitle {
+  position: relative;
+  margin-top: -8px;
+}
+
+.posTitle .adj {
+  width: max-content;
+  background: #17a2b8a3;
+  margin: auto;
+  width: 100%;
+}

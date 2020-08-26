@@ -1,0 +1,17 @@
+<div class="application-loading-container" id="loader">
+  <div class="application-loading-box"><h2>Cargando...</h2></div>
+</div>
+<!-- Header -->
+<app-header></app-header>
+
+<app-inicio *ngIf="router.url=='/'"></app-inicio>
+
+<!-- Cargador de rutas -->
+<router-outlet></router-outlet>
+
+<!-- <app-contact></app-contact> -->
+
+<!-- Footer -->
+<app-footer></app-footer>
+<app-login></app-login>
+<app-registro></app-registro>

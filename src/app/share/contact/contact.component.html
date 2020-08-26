@@ -1,0 +1,56 @@
+<section class="contact_sec pt-5 pb-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 pb-5">
+        <div class="container position-relative text-white">
+          <h2 class="h4 mb-5">Contactanos</h2>
+          <div class="row">
+            <div class="mb-5 mb-md-0 col-md-7">
+              <form class="">
+                <div class="controls">
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label for="name" class="form-label">Nombre completo *</label>
+                        <input name="name" id="name" placeholder="Diganos su nombre completo" required="" type="text" class="form-control" [(ngModel)]="fullname">
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label for="surname" class="form-label">Número telefonico</label>
+                        <input name="surname" id="surname" placeholder="Danos un número de telefono" required="" type="text" class="form-control" [(ngModel)]="phone">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="email" class="form-label">Correo electronico *</label>
+                    <input name="email" id="email" placeholder="¿Cúal es su correo electronico?" required="" type="email" class="form-control" [(ngModel)]="mail_sender">
+                  </div>
+                  <div class="form-group">
+                    <label for="message" class="form-label">Su mensaje *</label>
+                    <textarea rows="4" name="message" id="message" placeholder="Por favor dejenos su mensaje, con todos los detalles que sean necesarios..." required=""
+                      class="form-control" [(ngModel)]="message"></textarea>
+                  </div>
+                  <div class="text-center">
+                    <button type="submit" class="btn btn-outline-light" (click)="sendMail()" [disabled]="sendMsg">
+                      <i class="fas fa-envelope-open-text"></i>
+                      &nbsp;&nbsp;Enviar mensaje
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="col-md-5">
+              <div class="ml-lg-4 p-3">
+                <p class="pt-3">Para nosotros, sus mensajes son muy valiosos, es por ello que le agradecemos desde ya cualquier mensaje que nos envies con sugerencias,
+                  quejas, comentarios y le daremos la más alta prioridad que este a nuestro alcance.</p>
+                <p class="">Pronto nos estaremos contactando con su persona y brindaremos que esperamos que sea satisfactoria. Muchas gracias!!!</p>
+                <p class="">Todos sus datos seran tratados de forma completamente confidencial.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

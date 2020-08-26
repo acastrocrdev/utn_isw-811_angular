@@ -1,0 +1,33 @@
+nav.navbar {
+  position: relative;
+  top: 0;
+  text-align: center;
+  width: 100%;
+  z-index: 9999;
+  height: fit-content;
+}
+.navbar-nav .nav-item:hover {
+  background: #f6aa54;
+  border-radius: 0.3em;
+  border: 1px solid #f6aa54;
+  cursor: pointer !important;
+}
+
+.navbar-nav .nav-item .active {
+  background: #f4b977;
+  border-radius: 0.3em;
+  border: 1px solid #f4b977;
+  cursor: pointer !important;
+}
+
+.navbar-nav .dropdown-menu.show {
+  background: #f8d5ae;
+}
+
+.navbar-nav .dropdown-menu.show .dropdown-divider {
+  background: #f4b977;
+}
+
+.navbar-nav .dropdown-menu.show .dropdown-item:hover {
+  background: #f6aa54;
+}

@@ -1,0 +1,21 @@
+footer {
+	position: fixed;
+	bottom: 0;
+	text-align: center;
+	display: block;
+	width: 100%;
+	padding: 0px;
+	z-index: 9999;
+}
+footer p {
+	margin: 0;
+}
+footer img {
+	height: 50px;
+	padding: 10px;
+}
+
+.clear {
+	clear: both;
+	height: 60px;
+}

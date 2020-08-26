@@ -1,0 +1,19 @@
+<div class="card h-100">
+  <div class="card-body text-secondary">
+    <img class="img-thumbnail" [src]="img_src" [alt]="title">
+    <a href="#" class="card__play">
+      <i class="icon ion-ios-play"></i>
+    </a>
+    <h3 class="card__title my-3">
+      <a routerLink="/cartelera/{{location_id}}">{{title}}</a>
+    </h3>
+    <h6 class="my-3" *ngIf="tags!=''">{{tags}}</h6>
+    <p class="text-justify mb-5"><em>{{detail}}</em></p>
+    <div class="locations_btn">
+      <a class="btn btn-outline-info btn-sm" routerLink="/cartelera/{{location_id}}">
+        <i class="fas fa-film"></i>
+        Ver cartelera de {{title}}
+      </a>
+    </div>
+  </div>
+</div>

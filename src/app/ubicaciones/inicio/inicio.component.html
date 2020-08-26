@@ -1,0 +1,57 @@
+<section class="topMembers py-5">
+  <div class="container">
+    <nav class="" aria-label="breadcrumb">
+      <ol class="breadcrumb pl-0 justify-content-center">
+        <li class="breadcrumb-item">
+          <a routerLink="/home">Inicio</a>
+        </li>
+        <li class="active breadcrumb-item" aria-current="page">Ubicaciones</li>
+      </ol>
+    </nav>
+    <div class="p-3 mb-2 bg-dark text-white">
+      <h1>Ubicaciones</h1>
+      <h5 class="my-4">Varias locaciones para su completo disfrute:</h5>
+      <p><em>(Proximamente más ubicaciones para su completo relax...)</em></p>
+    </div>
+  </div>
+</section>
+<section class="pt-5 pb-4 membersList">
+  <div class="container">
+    <div class="row">
+      <div class="mt-4 h-100 w-100" *ngFor="let prod of serverResponse">
+        <div class="card h-100 w-100">
+          <div class="card-body text-body pb-1 row">
+            <div class="col-md-3">
+              <div class="img-cont">
+                <img class="img-pro" [src]="img_path+prod.img_src" [alt]="prod.name">
+              </div>
+            </div>
+            <div class="col-md-9">
+              <h3 class="card__title my-2">
+                <a routerLink="/cartelera/{{prod.id}}">{{prod.name}}</a>
+              </h3>
+              <h6 class="text-justify">{{prod.resume}}</h6>
+              <p class="text-justify"><em>{{prod.description}}</em></p>
+              <div class="row">
+                <div class="col-md-4 mt-2 mb-4"></div>
+                <div class="col-md-8 text-right">
+                  <a *ngIf="prod.waze!='' && prod.waze != null" (click)="goToLink('waze', prod)" class="btn
+                    btn-twitter text-nowrap mr-1" title="Ir a Waze">
+                    <i class="fab fa-waze"></i>
+                  </a>
+                  <a *ngIf="prod.google_maps!='' && prod.google_maps != null" (click)="goToLink('gmaps', prod)" class="btn
+                    btn-google text-nowrap mr-1" title="Ir a Google Maps">
+                    <i class="fas fa-map-marked-alt"></i>
+                  </a>
+                  <a class="btn btn-info text-nowrap mr-1" routerLink="/cartelera/{{prod.id}}">
+                    <i class="fas fa-film"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

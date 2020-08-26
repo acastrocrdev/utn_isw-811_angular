@@ -1,0 +1,100 @@
+<section class="adminZone py-5">
+  <div class="container">
+    <nav class="" aria-label="breadcrumb">
+      <ol class="breadcrumb pl-0 justify-content-center">
+        <li class="breadcrumb-item">
+          <a routerLink="/admin">Admin</a>
+        </li>
+        <li class="breadcrumb-item">
+          <a routerLink="/admin/cartelera-listado">Listado</a>
+        </li>
+        <li class="active breadcrumb-item" aria-current="page">Administración de cartelera</li>
+      </ol>
+    </nav>
+    <form [formGroup]="form" (ngSubmit)="saveBillboard()" novalidate>
+      <input id="id" name="id" type="hidden" formControlName="id">
+      <div class="row">
+        <div class="col-12 form__content">
+          <div class="row">
+            <div class="col-12">
+              <ng-select2
+                id="movies_list"
+                name="movies_list"
+                [data]="select2_mov"
+                [options]="options_mov"
+                [width]="500"
+                [placeholder]="'Seleccione la pelicula...'"
+                formControlName="movie_id">
+              </ng-select2>
+              <span *ngIf="errorHandling('movie_id', 'required')" class="text-danger">Debe seleccionar la pelicula</span>
+            </div>
+            <div class="col-12 col-md-6">
+              <ng-select2
+                id="location_id"
+                name="location_id"
+                [data]="select2_loc"
+                [options]="options_loc"
+                [width]="500"
+                [placeholder]="'Seleccione la localidad...'"
+                formControlName="location_id">
+              </ng-select2>
+              <span *ngIf="errorHandling('location_id', 'required')" class="text-danger">Debe seleccionar la localidad</span>
+            </div>
+            <div class="col-12 col-md-6">
+              <input id="trailer" name="trailer" type="date" class="form_input" placeholder="Seleccione la fecha de la función" formControlName="date">
+              <span *ngIf="errorHandling('date', 'required')" class="text-danger">Debe seleccionar la fecha</span>
+            </div>
+            <div class="col-12 col-md-6">
+              <input id="teaser" name="teaser" type="time" class="form_input" placeholder="Seleccione la hora de la función" formControlName="time">
+              <span *ngIf="errorHandling('time', 'required')" class="text-danger">Debe seleccionar la hora</span>
+            </div>
+            <div class="col-12 col-md-6">
+              <ng-select2
+                id="enable"
+                name="enable"
+                [data]="select2_est"
+                [options]="options_est"
+                [width]="500"
+                [placeholder]="'Seleccione el estado de la venta...'"
+                formControlName="sales_enable">
+              </ng-select2>
+              <span *ngIf="errorHandling('sales_enable', 'required')" class="text-danger">Debe seleccionar el estado de la venta</span>
+            </div>
+            <div class="col-12 col-md-6">
+              <ng-select2
+                id="enable"
+                name="enable"
+                [data]="select2_vis"
+                [options]="options_vis"
+                [width]="500"
+                [placeholder]="'Seleccione la visibilidad...'"
+                formControlName="visible">
+              </ng-select2>
+              <span *ngIf="errorHandling('visible', 'required')" class="text-danger">Debe seleccionar la visibilidad</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 row">
+          <div class="col-12 col-md-4">
+            <!-- [disabled]="!form.valid" -->
+            <button class="btn btn-outline-primary btn-sm btn_search" (click)="onBack()">
+              <i class="fas fa-chevron-circle-left"></i> Volver
+            </button>
+          </div>
+          <div class="col-12 col-md-4">
+            <!-- [disabled]="!form.valid" -->
+            <button class="btn btn-outline-info btn-sm btn_search" (click)="onReset()">
+              <i class="fas fa-eraser"></i> Limpiar
+            </button>
+          </div>
+          <div class="col-12 col-md-4">
+            <!-- [disabled]="!form.valid" -->
+            <button type="submit" class="btn btn-outline-success btn-sm btn_search">
+              <i class="far fa-save"></i> Guardar
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>

@@ -1,0 +1,143 @@
+
+<section class="adminZone py-5">
+  <div class="container">
+    <nav class="" aria-label="breadcrumb">
+      <ol class="breadcrumb pl-0 justify-content-center">
+        <li class="breadcrumb-item">
+          <a routerLink="/admin">Admin</a>
+        </li>
+        <li class="breadcrumb-item">
+          <a routerLink="/admin/peliculas-listado">Listado</a>
+        </li>
+        <li class="active breadcrumb-item" aria-current="page">Administración de peliculas</li>
+      </ol>
+    </nav>
+    <form [formGroup]="form" (ngSubmit)="saveMovie()" novalidate>
+      <input id="id" name="id" type="hidden" formControlName="id">
+      <input id="img_src_url" name="img_src_url" type="hidden" formControlName="img_src_url">
+      <input id="img_src_bd_url" name="img_src_bd_url" type="hidden" formControlName="img_src_bd_url">
+      <div class="row">
+        <div class="col-12 col-md-4 form__cover">
+          <div class="form_poster">
+            <label for="img_src_">
+              <span [ngClass]="this.haveImg ? 'badge badge-pill badge-success p-3' : 'badge badge-pill badge-info p-3'">{{messagePoster}}</span>
+            </label>
+            <input id="img_src_" name="img_src_" type="file" accept="image/*" (change)="updateImage_img_src($event)">
+            <img id="img_src_img" [src]="image_img_src" *ngIf="image_img_src">
+            <span *ngIf="errorHandling('img_src', 'required')" class="text-danger">Debe seleccionar el poster</span>
+          </div>
+          <div class="form_poster">
+            <label for="img_src_bd_">
+              <span [ngClass]="this.haveImg_bg ? 'badge badge-pill badge-success p-3' : 'badge badge-pill badge-info p-3'">{{messagePoster_bg}}</span>
+            </label>
+            <input id="img_src_bd_" name="img_src_bd_" type="file" accept="image/*" (change)="updateImage_img_src_bg($event)">
+            <img id="img_src_bd_img" [src]="image_img_src_bg" *ngIf="image_img_src_bg">
+            <span *ngIf="errorHandling('img_src_bd', 'required')" class="text-danger">Debe seleccionar el banner</span>
+          </div>
+        </div>
+        <div class="col-12 col-md-8 form__content">
+          <div class="row">
+            <div class="col-10">
+              <input id="name" name="name" type="text" class="form_input" placeholder="Nombre" formControlName="name">
+              <span *ngIf="errorHandling('name', 'required')" class="text-danger">El nombre es requerido</span>
+            </div>
+            <div class="col-2">
+              <button type="button" class="btn btn-outline-primary btn-sm btn_search" (click)="findMovies()" *ngIf="!emptyName()">
+                <i class="fas fa-search"></i> Buscar
+              </button>
+            </div>
+            <div class="col-12">
+              <textarea id="resume" name="resume" class="form_textarea small" placeholder="Resumen" formControlName="resume"></textarea>
+            </div>
+            <div class="col-12">
+              <textarea id="synopsis" name="synopsis" class="form_textarea" placeholder="Sipnosis" formControlName="synopsis"></textarea>
+              <span *ngIf="errorHandling('synopsis', 'required')" class="text-danger">La sipnosis es requerida</span>
+            </div>
+            <div class="col-12">
+              <ng-select2
+                id="genres_list"
+                name="genres_list"
+                [data]="select2_gen"
+                [options]="options_gen"
+                [width]="500"
+                [placeholder]="'Seleccione al menos un genero...'"
+                formControlName="genres_list">
+              </ng-select2>
+              <span *ngIf="errorHandling('genres_list', 'required')" class="text-danger">Debe seleccionar al menos un genero</span>
+            </div>
+            <div class="col-12">
+              <textarea id="production" name="production" class="form_textarea" placeholder="Producción" formControlName="production"></textarea>
+            </div>
+            <div class="col-12 col-md-6">
+              <input id="trailer" name="trailer" type="text" class="form_input" placeholder="Trailer (Código Youtube)" formControlName="trailer">
+            </div>
+            <div class="col-12 col-md-6">
+              <input id="teaser" name="teaser" type="text" class="form_input" placeholder="Teaser (Código Youtube)" formControlName="teaser">
+            </div>
+            <div class="col-12 col-md-6">
+              <input id="external_code" name="external_code" type="text" class="form_input" placeholder="Código externo (Código TMDB)" formControlName="external_code">
+            </div>
+            <div class="col-12 col-md-6">
+              <ng-select2
+                id="classification_id"
+                name="classification_id"
+                [data]="select2_clas"
+                [options]="options_clas"
+                [width]="500"
+                [placeholder]="'Seleccione la clasificación...'"
+                formControlName="classification_id">
+              </ng-select2>
+              <span *ngIf="errorHandling('classification_id', 'required')" class="text-danger">Debe seleccionar la clasificación</span>
+            </div>
+            <div class="col-12 col-md-6">
+              <input id="facebook_id" name="facebook_id" type="text" class="form_input" placeholder="Facebook (Código Facebook)" formControlName="facebook_id">
+            </div>
+            <div class="col-12 col-md-6">
+              <input id="twitter_id" name="name" type="text" class="form_input" placeholder="Twitter (Código Twitter)" formControlName="twitter_id">
+            </div>
+            <div class="col-12 col-md-6">
+              <input id="instagram_id" name="instagram_id" type="text" class="form_input" placeholder="Instagram (Código Instagram)" formControlName="instagram_id">
+            </div>
+            <div class="col-12 col-md-6">
+              <input id="site" name="site" type="text" class="form_input" placeholder="Sitio Web (Dirección completa)" formControlName="site">
+            </div>
+            <div class="col-12 col-md-6">
+              <input id="duration" name="duration" type="text" class="form_input" placeholder="Duración" formControlName="duration">
+            </div>
+            <div class="col-12 col-md-6">
+              <ng-select2
+                id="enable"
+                name="enable"
+                [data]="select2_est"
+                [options]="options_est"
+                [width]="500"
+                [placeholder]="'Seleccione el estado...'"
+                formControlName="enable">
+              </ng-select2>
+              <span *ngIf="errorHandling('enable', 'required')" class="text-danger">Debe seleccionar el estado</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-4">
+          <!-- [disabled]="!form.valid" -->
+          <button class="btn btn-outline-primary btn-sm btn_search" (click)="onBack()">
+            <i class="fas fa-chevron-circle-left"></i> Volver
+          </button>
+        </div>
+        <div class="col-12 col-md-4">
+          <!-- [disabled]="!form.valid" -->
+          <button class="btn btn-outline-info btn-sm btn_search" (click)="onReset()">
+            <i class="fas fa-eraser"></i> Limpiar
+          </button>
+        </div>
+        <div class="col-12 col-md-4">
+          <!-- [disabled]="!form.valid" -->
+          <button type="submit" class="btn btn-outline-success btn-sm btn_search">
+            <i class="far fa-save"></i> Guardar
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
+<app-movies-preview></app-movies-preview>

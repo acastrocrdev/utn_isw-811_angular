@@ -1,0 +1,96 @@
+<section class="topMembers py-5">
+  <div class="container">
+    <nav class="" aria-label="breadcrumb">
+      <ol class="breadcrumb pl-0 justify-content-center">
+        <li class="breadcrumb-item">
+          <a routerLink="/home">Inicio</a>
+        </li>
+        <li class="active breadcrumb-item" aria-current="page">productos</li>
+      </ol>
+    </nav>
+    <div class="p-3 mb-2 bg-dark text-white">
+      <h1>Productos</h1>
+      <h5 class="my-4">Para el disfrute de su paladar las siguientes opciones:</h5>
+      <p><em>(Entre otros productos adicionales...)</em></p>
+    </div>
+  </div>
+</section>
+<section class="pt-5 pb-4 membersList">
+  <div class="container">
+    <div class="row">
+      <div class="mt-4 h-100 w-100">
+        <div class="card h-100 w-100">
+          <div class="card-body text-body row">
+            <h3>Nuestros productos mejor votados...</h3>
+            <table id="dtList_3" class="table table-sm mt-2">
+              <thead>
+                <tr>
+                  <th class="per_40 text-center">Producto</th>
+                  <th class="per_15 text-center">Votos</th>
+                  <th class="per_15 text-center">Calificación</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let vot of serverResponse_order">
+                  <td>{{ vot.name}}</td>
+                  <td class="text-center">{{ vot.ranking_product_count || 0}}</td>
+                  <td class="text-center">
+                    <div class="content_r">
+                      <div [ngClass]="(vot.ranking_product_sum / vot.ranking_product_count || 0) >= 1 ? 'rating-select': ''">
+                        <span class="fa fa-star rating_movie rating_1"></span>
+                      </div>
+                      <div [ngClass]="(vot.ranking_product_sum / vot.ranking_product_count || 0) >= 2 ? 'rating-select': ''">
+                        <span class="fa fa-star rating_movie rating_2"></span>
+                      </div>
+                      <div [ngClass]="(vot.ranking_product_sum / vot.ranking_product_count || 0) >= 3 ? 'rating-select': ''">
+                        <span class="fa fa-star rating_movie rating_3"></span>
+                      </div>
+                      <div [ngClass]="(vot.ranking_product_sum / vot.ranking_product_count || 0) >= 4 ? 'rating-select' : ''">
+                        <span class="fa fa-star rating_movie rating_4"></span>
+                      </div>
+                      <div [ngClass]="(vot.ranking_product_sum / vot.ranking_product_count || 0) === 5 ? 'rating-select': ''">
+                        <span class="fa fa-star rating_movie rating_5"></span>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="mt-4 h-100 w-100" *ngFor="let prod of serverResponse">
+        <div class="card h-100 w-100">
+          <div class="card-body text-body pb-1 row">
+            <div class="col-md-3">
+              <div class="img-cont">
+                <img class="img-pro" [src]="img_path+prod.img_src" [alt]="prod.name">
+              </div>
+            </div>
+            <div class="col-md-9">
+              <h3 class="card__title my-2">
+                <a href="#">{{prod.name}}</a>
+              </h3>
+              <p class="text-justify"><em>{{prod.description}}</em></p>
+              <div class="row">
+                <span class="card__category col-md-4">
+                  <span class="badge badge-secondary mr-2" *ngFor="let classi of prod.classification_prod" [attr.data-id]="classi.id" title="{{classi.name}}">{{classi.name}}</span>
+                </span>
+                <div class="mt-2 mb-4 col-md-4">
+                  <p class="text-center mb-0 text-dark"><em><b>Precio:</b> {{prod.amount | currency: '¢'}}</em></p>
+                  <app-rating class="mb-3 text-body text-muted" [to_rating]="'product'" [code]="prod.id" [ranking]="prod.ranking_product_sum" [votes]="prod.ranking_product_count"></app-rating>
+                </div>
+                <div class="col-md-4 text-right">
+                  <button type="button" class="btn btn-outline-success btn-sm mr-2" [routerLink]="['/productos/', prod.id]">
+                    <i class="fas fa-hotdog"></i>
+                    &nbsp;&nbsp;Ver producto
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

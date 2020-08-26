@@ -1,0 +1,66 @@
+ <div class="card h-100">
+  <div class="card-body text-secondary row">
+    <div class="col-6">
+      <div class="external_btns py-5 px-4" [ngClass]="show_btns == true ? 'active' : ''" (mouseout)="hiddenBtns()">
+        <div class="bottomPos">
+          <a *ngIf="movie.facebook_id!='' && movie.facebook_id != null" (click)="goToLink('face')" (mouseover)="showBtns()" class="btn btn-facebook text-nowrap mr-1"
+            title="Ir al Facebook">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a *ngIf="movie.instagram_id!='' && movie.instagram_id != null" (click)="goToLink('inst')" (mouseover)="showBtns()" class="btn btn-instagram text-nowrap mr-1"
+            title="Ir al Instagram">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a *ngIf="movie.twitter_id!='' && movie.twitter_id != null" (click)="goToLink('twit')" (mouseover)="showBtns()" class="btn btn-twitter text-nowrap mr-1"
+            title="Ir al Twitter">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a *ngIf="movie.site!='' && movie.site != null" (click)="goToLink('page')" (mouseover)="showBtns()" class="btn btn-info text-nowrap mr-1 text-white"
+            title="Ir al Sitio Web">
+            <i class="fas fa-link"></i>
+          </a>
+        </div>
+      </div>
+      <span class="fa-layers fa-fw fa-3x icon-classification" title={{movie.classification.name}}>
+        <i class="fas fa-certificate"></i>
+        <span class="fa-layers-text fa-inverse" data-fa-transform="shrink-11.5 rotate--30" style="font-weight:900; font-size:1.5em;">{{movie.classification.code}}</span>
+      </span>
+      <img class="img-thumbnail" [src]="img_src" [alt]="movie.name" (mouseover)="showBtns()">
+      <span class="card__category">
+        <span class="badge badge-secondary mr-2" *ngFor="let gender of movie.genres" [attr.data-id]="gender.id">{{gender.name}}</span>
+      </span>
+      <app-rating class="mb-3 text-body" [to_rating]="'movie'" [code]="movie.id" [ranking]="movie.ranking_sum" [votes]="movie.ranking_count"></app-rating>
+    </div>
+    <div class="col-6">
+      <a href="#" class="card__play">
+        <i class="icon ion-ios-play"></i>
+      </a>
+      <h3 class="card__title my-2">
+        <a href="#">{{movie.name}}</a>
+      </h3>
+      <h6 class="my-2" *ngIf="movie.resume!=''">{{movie.resume}}</h6>
+      <p class="text-justify sypnosis"><em>{{movie.synopsis}}</em></p>
+    </div>
+    <div class="mt-0 mb-0 col-12 row ml-0">
+      <div class="col-6 pl-0">
+        <button *ngIf="movie.trailer!= null && movie.trailer!==''" type="button" class="btn btn-outline-success btn-sm w-100" data-target="#movie-preview"
+          (click)="viewTrailer(movie)">
+          <i class="fas fa-film"></i>
+          &nbsp;&nbsp;Ver Trailer
+        </button>
+      </div>
+      <div class="col-6 pr-0">
+        <button *ngIf="movie.teaser!= null && movie.teaser!==''" type="button" class="btn btn-outline-info btn-sm w-100" data-target="#movie-preview" (click)="viewTeaser(movie)">
+          <i class="fas fa-video"></i>
+          &nbsp;&nbsp;Ver Teaser
+        </button>
+      </div>
+    </div>
+    <div class="col-12 mt-3 mx-2">
+      <button type="button" class="btn btn-outline-primary btn-sm btn-block det" [routerLink]="['/peliculas/', movie.id]">
+        <i class="fas fa-ticket-alt"></i>
+        &nbsp;&nbsp;Ver detalles
+      </button>
+    </div>
+  </div>
+</div>

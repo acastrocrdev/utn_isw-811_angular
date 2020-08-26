@@ -1,0 +1,63 @@
+.card-body .img-thumbnail {
+  height: 325px;
+  width: 215px;
+}
+
+.btnsZone {
+  position: relative;
+}
+
+app-rating {
+  display: block;
+}
+
+.external_btns {
+  position: absolute;
+  width: 0px;
+  height: 0px;
+  overflow: hidden;
+  top: -9999px;
+  border-radius: 5px;
+}
+
+.external_btns.active {
+  width: 230px;
+  left: 15px;
+  top: -10px;
+  height: 340px;
+  background: #9999999c;
+}
+
+.bottomPos {
+  position: relative;
+  margin-top: 100%;
+}
+
+.icon-classification {
+  position: absolute;
+  color: #ffc584c4;
+  -webkit-text-fill-color: #000000;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: white;
+  text-shadow: 0 0 17px #fff;
+  stroke: #ff8700;
+  stroke-width: 10;
+  right: 5px;
+  top: -15px;
+}
+
+.det {
+  margin-left: -8px;
+}
+
+.ml_15 {
+  margin-left: 15px;
+}
+
+.sypnosis em {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 11;
+  -webkit-box-orient: vertical;
+}

@@ -1,0 +1,81 @@
+.topMembers {
+  position: relative;
+  text-align: center;
+  box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.075);
+  background: #1f1f1f;
+  background-image: url(/assets/images/background/peliculas_1.jpg);
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center top;
+  background-size: cover;
+}
+
+.topMembers:before {
+  content: '';
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 0;
+  position: absolute;
+  background: #ffc584;
+  opacity: 0.3;
+}
+
+.topMembers .container {
+  display: block;
+  position: relative;
+}
+
+.membersList .memberPhoto {
+  max-height: 145px;
+}
+
+.btnsZone {
+  position: relative;
+}
+
+app-rating {
+  display: block;
+}
+
+.external_btns {
+  position: absolute;
+  width: 0px;
+  height: 0px;
+  overflow: hidden;
+  top: -9999px;
+  border-radius: 5px;
+}
+
+.external_btns.active {
+  width: 230px;
+  left: 15px;
+  top: -10px;
+  height: 340px;
+  background: #9999999c;
+}
+
+.bottomPos {
+  position: relative;
+}
+
+.icon-classification {
+  position: absolute;
+  color: #ffc584c4;
+  -webkit-text-fill-color: #000000;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: white;
+  text-shadow: 0 0 17px #fff;
+  stroke: #ff8700;
+  stroke-width: 10;
+  right: 5px;
+  top: -15px;
+}
+
+.content_r {
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  width: fit-content;
+}

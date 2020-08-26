@@ -1,0 +1,45 @@
+<ng-template #content_modal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">{{modal_title}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+
+    <ng-container *ngIf="is_movies">
+      <ng-container *ngIf="haveMovies">
+        <div class="col-12 form__cover">
+          <table id="dtListsss" class="table table-striped table-bordered table-sm row-border hover" datatable [dtOptions]="dtOptions">
+            <thead>
+              <tr>
+                <th class="image_r">Imagen</th>
+                <th class="title_r">Nombre</th>
+                <th>Sipnosis</th>
+                <th class="options_r">Seleccionar</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let movs of moviesList" id="{{movs.id}}">
+                <td class="text-center">
+                  <img src="{{imagesMoviesDB}}w154{{movs.poster_path}}" class="prod_list_img" />
+                </td>
+                <td>{{ movs.title }}</td>
+                <td>{{ movs.overview}}</td>
+                <td class="options_res">
+                  <button type="button" class="btn btn-outline-primary btn-sm" attr.edit-element-id="{{movs.id}}">
+                    <i class="fas fa-edit"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="!haveMovies">
+        no
+      </ng-container>
+    </ng-container>
+  </div>
+</ng-template>

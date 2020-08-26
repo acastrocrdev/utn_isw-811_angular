@@ -1,0 +1,23 @@
+.contact_sec {
+	position: relative;
+	text-align: center;
+	box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.075);
+	background: #1f1f1f;
+	background-image: url(/assets/images/background/contact_1.jpg);
+	min-height: 300px;
+	background-attachment: fixed;
+	background-position: center top;
+	background-size: cover;
+}
+
+.contact_sec:before {
+	content: '';
+	left: 0;
+	top: 0;
+	height: 100%;
+	width: 100%;
+	z-index: 0;
+	position: absolute;
+	background: #232323;
+	opacity: 0.8;
+}

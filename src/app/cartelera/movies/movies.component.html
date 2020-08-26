@@ -1,0 +1,14 @@
+<section class="films_sec pt-5 pb-5">
+  <div class="container">
+    <div class="col-sm-12 text-center">
+      <h1>Peliculas</h1>
+      <h5 class="my-4">Actualmente en Cartelera y proximos estrenos</h5>
+      <ng-container *ngIf="serverResponse">
+        <div class="row row-cols-1 row-cols-md-2" *ngFor="let chunk of serverResponse | arrSplit: 4">
+          <app-movies-card class="col p-2" *ngFor="let mov of chunk" [movie]="mov"></app-movies-card>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+  <!-- <app-movies-preview></app-movies-preview> -->
+</section>

@@ -1,0 +1,38 @@
+.modal-body {
+  display: block;
+  overflow: hidden;
+  position: relative;
+  height: inherit;
+}
+
+.form__cover {
+  display: block;
+  height: inherit;
+}
+
+.prod_list_img {
+  max-width: 70px;
+  max-height: 70px;
+}
+
+button>i,
+button>svg {
+  pointer-events: none;
+}
+
+.image_r {
+  width: 10%;
+}
+
+.title_r {
+  width: 20%;
+}
+
+.options_r {
+  width: 10% !important;
+}
+
+.options_res {
+  text-align: center;
+  padding-top: 20px;
+}

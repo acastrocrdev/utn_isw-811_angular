@@ -1,0 +1,14 @@
+<section class="locations_sec pt-5 pb-5">
+  <div class="container position-relative">
+    <div class="text-center text-white">
+      <h1>Nuestras ubicaciones</h1>
+      <h5>Para su comodidad, tenemos las siguientes ubicaciones</h5>
+      <p><em>(Pronto tendremos más ubicaciones cerca de su hogar...)</em></p>
+      <ng-container *ngIf="serverResponse">
+        <div class="row row-cols-1 row-cols-md-3" *ngFor="let splitArr of serverResponse | arrSplit:3">
+          <app-locations-card class="col p-2" *ngFor="let ubi of splitArr" [loc]="ubi"></app-locations-card>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</section>

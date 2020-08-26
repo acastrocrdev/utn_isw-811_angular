@@ -1,0 +1,100 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-orange_light">
+  <a class="navbar-brand" routerLink="/">
+    <img src="assets/images/base/logo_cinema.png" class="logo" alt="Logo Principal Auto Cinema HerGab">
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse"
+    data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+          Inicio
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/ubicaciones" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+          Ubicaciones
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/productos" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+          Productos
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/peliculas" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+          Peliculas
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/home/about" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+          Acerca de
+        </a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" routerLinkActive="active"
+          [routerLinkActiveOptions]="{exact:false}">
+          Cartelera
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown" *ngIf="serverResponseLocations">
+          <div *ngFor="let locs of serverResponseLocations">
+            <a class="dropdown-item" routerLink="/cartelera/{{locs.id}}" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">{{locs.name}}</a>
+            <div class="dropdown-divider"></div>
+          </div>
+        </div>
+      </li>
+      <li *ngIf="currentUser != null && currentUser.user.rol_id <= 2" class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" routerLinkActive="active"
+          [routerLinkActiveOptions]="{exact:false}">
+          Administración
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" routerLink="/admin/peliculas-listado" routerLinkActive="active" [routerLinkActiveOptions]="{exact:false}">Listar peliculas</a>
+          <a class="dropdown-item" routerLink="/admin/peliculas-nuevo" routerLinkActive="active" [routerLinkActiveOptions]="{exact:false}">Nueva pelicula</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" routerLink="/admin/productos-listado" routerLinkActive="active" [routerLinkActiveOptions]="{exact:false}">Listar productos</a>
+          <a class="dropdown-item" routerLink="/admin/productos-nuevo" routerLinkActive="active" [routerLinkActiveOptions]="{exact:false}">Nuevo producto</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" routerLink="/admin/cartelera-listado" routerLinkActive="active" [routerLinkActiveOptions]="{exact:false}">Listar cartelera</a>
+          <a class="dropdown-item" routerLink="/admin/cartelera-nuevo" routerLinkActive="active" [routerLinkActiveOptions]="{exact:false}">Nueva cartelera</a>
+          <!-- <div class="dropdown-divider"></div>
+          <a class="dropdown-item" routerLink="/admin/ubicaciones-listado" routerLinkActive="active" [routerLinkActiveOptions]="{exact:false}">Listar ubicaciones</a>
+          <a class="dropdown-item" routerLink="/admin/ubicaciones-nuevo" routerLinkActive="active" [routerLinkActiveOptions]="{exact:false}">Nueva ubicación</a> -->
+        </div>
+      </li>
+      <li *ngIf="currentUser != null" class="nav-item d-block d-lg-none">
+        <a class="nav-link" routerLink="/reservas/lista" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+          <i class="fas fa-shopping-cart"></i> {{currentUser.user.name}}
+        </a>
+      </li>
+      <li *ngIf="currentUser == null" class="nav-item d-block d-lg-none">
+        <a class="nav-link" (click)="showLogin()">
+          <i class="fas fa-sign-in-alt mr-3"></i> Iniciar
+        </a>
+      </li>
+      <li class="nav-item d-block d-lg-none" *ngIf="currentUser != null">
+        <a class="nav-link" (click)="logout()">
+          <i class="fas fa-sign-out-alt mr-3"></i> Salir
+        </a>
+      </li>
+    </ul>
+  </div>
+  <form class="form-inline">
+    <!-- <input class="form-control mr-sm-2" type="search" placeholder="Buscar"
+      aria-label="Search">
+    <button class="btn btn-outline-primary my-2 my-sm-0 mr-2" type="submit">Buscar</button> -->
+    <button *ngIf="currentUser != null" class="btn btn btn-outline-dark mx-2 d-none d-lg-block" type="button" routerLink="/reservas/lista" routerLinkActive="active"
+      [routerLinkActiveOptions]="{exact:true}">
+      <i class="fas fa-shopping-cart"></i> {{currentUser.user.name}}
+    </button>
+    <button *ngIf="currentUser == null" class="btn btn btn-outline-dark mx-2 d-none d-lg-block" type="button" (click)="showLogin()">
+      <i class="fas fa-sign-in-alt mr-3"></i> Iniciar
+    </button>
+    <button *ngIf="currentUser != null" class="btn btn btn-outline-dark mx-2 d-none d-lg-block" type="button" (click)="logout()">
+      <i class="fas fa-sign-out-alt mr-3"></i> Salir
+    </button>
+  </form>
+</nav>

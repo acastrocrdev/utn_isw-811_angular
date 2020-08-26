@@ -1,0 +1,8 @@
+{
+  "/api/*": {
+    "target": "https://autocine_laravel.test",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}

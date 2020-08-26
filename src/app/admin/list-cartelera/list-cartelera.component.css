@@ -1,0 +1,9 @@
+.prod_list_img {
+  max-width: 70px;
+  max-height: 70px;
+}
+
+button>i,
+button>svg {
+  pointer-events: none;
+}

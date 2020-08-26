@@ -1,0 +1,21 @@
+<section class="products_sec pt-5 pb-5">
+  <div class="container">
+    <div class="col-sm-12 text-center text-white">
+      <h1>Productos</h1>
+      <h5 class="my-4">Para el disfrute de su paladar las siguientes opciones:</h5>
+      <p><em>(Entre otros productos adicionales...)</em></p>
+      <span class="badge badge-success mr-2 mt-2 px-3 py-2 badgeHand" *ngFor="let prod of serverResponseCategories" (click)="filterProds(prod.id)">{{prod.name}}</span>
+      <span class="badge badge-success mr-2 mt-2 px-3 py-2 badgeHand" (click)="filterProds(0)">Todos</span>
+      <ng-container *ngIf="productsClone?.length> 0">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-xl-4" *ngFor="let splitArr of productsClone | arrSplit:4">
+          <app-products-card class="col p-2" *ngFor="let prod of splitArr" [prod]="prod"></app-products-card>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="productsClone?.length == 0">
+        <div class="alert alert-danger mt-4" role="alert">
+          No tenemos productos en esta categoria, por favor selecciona otra.
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,59 @@
+ <section *ngIf="showContent" class="topMembers py-5">
+  <div class="container mb-5">
+    <nav class="" aria-label="breadcrumb">
+      <ol class="breadcrumb pl-0 justify-content-center">
+        <li class="breadcrumb-item">
+          <a routerLink="/home">Inicio</a>
+        </li>
+        <li class="breadcrumb-item">
+          <a routerLink="/productos">productos</a>
+        </li>
+        <li class="active breadcrumb-item" aria-current="page">{{serverResponse.name}}</li>
+      </ol>
+    </nav>
+    <div class="p-2 mb-2 bg-info text-white">
+      <div class="img-cont">
+        <img class="img-pro" [src]="img_path+serverResponse.img_src" [alt]="serverResponse.name">
+      </div>
+    </div>
+    <div class="w-100 text-center posTitle">
+      <div class="adj py-1 px-4">
+        <h1 class="my-2">{{serverResponse.name}}</h1>
+      </div>
+    </div>
+  </div>
+  <div class="container mt-5">
+    <div class="row px-2">
+      <div class="col-md-8">
+        <div class="mb-3 row">
+          <div class="col-md-5 col-lg-3"><b>Detalle</b></div>
+          <div class="col-md-8 col-lg-9 text-justify"><em>{{serverResponse.description}}</em></div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="mb-3 row">
+          <p class="col-md-4 col-lg-3"><b>Categoria:</b></p>
+          <p class="col-md-8 col-lg-9 text-justify"><em *ngFor="let classi of serverResponse.classification_prod">{{classi.name}}, </em></p>
+        </div>
+        <div class="clearfix"></div>
+        <div class="mb-3 row">
+          <p class="col-md-4 col-lg-3"><b>Precio unitario:</b></p>
+          <p class="col-md-8 col-lg-9 text-justify"><em>{{serverResponse.amount | currency: '¢'}}</em></p>
+        </div>
+      </div>
+      <div class="col-md-4 text-right">
+
+        <app-rating class="mb-3 text-body text-muted" [to_rating]="'product'" [code]="serverResponse.id" [ranking]="serverResponse.ranking_product_sum"
+          [votes]="serverResponse.ranking_product_count"></app-rating>
+        <div class="col-12 text-center">
+          <!-- <button type="button" class="btn btn-outline-success btn-sm mr-2" (click)="agregarCarrito(serverResponse)">
+            <i class="fas fa-hotdog"></i>
+            &nbsp;&nbsp;Agregar al carrito
+          </button> -->
+        </div>
+      </div>
+    </div>
+    <button type="button" class="btn btn-outline-primary btn-lg btn-block mt-4" (click)="backPage()">
+      &nbsp;&nbsp;Lista de productos
+    </button>
+  </div>
+</section>

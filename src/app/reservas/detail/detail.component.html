@@ -1,0 +1,118 @@
+<div class="container">
+  <div class="row">
+    <div class="well col-xs-12 col-sm-12 col-md-6 col-xs-offset-1 col-sm-offset-1 col-md-offset-3" id="invoice" #invoice>
+      <div class="row">
+        <div class="col-10 text-right">
+          <address>
+            <h4><strong>Autocinema HerGab</strong></h4>
+            <br>
+            Oficinas Centrales: Alajuela, Costa Rica.
+            <br>
+            <span title="Phone">Teléfono:</span> (506) 8888-8888
+            <br>
+            <span title="Email">E-mail:</span> info@autocinameHerGab.cr
+          </address>
+        </div>
+        <div class="col-12">
+          <h5>Datos Facturación:</h5>
+          <p>
+            <em><b>Fecha:</b> {{getDateActual()}}</em>
+          </p>
+          <p>
+            <em><b>Comprobante:</b> {{ticket}}</em>
+          </p>
+          <p>
+            <em><b>Factura:</b> {{claveFE[1]}}{{claveFE[2]}}</em>
+          </p>
+          <p>
+            <em><b>Clave:</b> {{claveFE[0]}}{{claveFE[1]}}{{claveFE[2]}}{{claveFE[3]}}</em>
+          </p>
+        </div>
+        <div class="col-12">
+          <h5>Datos cliente:</h5>
+          <p><b>Cliente:</b> {{currentUser.user.name}}</p>
+          <p><b>Correo:</b> {{currentUser.user.email}}</p>
+          <h5>Datos Función</h5>
+          <p><b>Pelicula:</b> {{dataBuy.movie}}</p>
+          <p><b>Fecha / Hora:</b> {{dataBuy.datetime}}</p>
+          <p><b>Ubicación:</b> {{dataBuy.location}}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="text-center">
+          <h1>Factura Electronica</h1>
+        </div>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Descripción:</th>
+              <th>Cantidad</th>
+              <th class="text-center">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let list of dataBuy.list">
+              <td class="col-md-9">
+                <h6><em>{{list.description}}</em></h6>
+              </td>
+              <td class="col-md-1" style="text-align: center"> {{list.quanty}} </td>
+              <td class="col-md-1 text-center">{{list.amount | currency: '¢'}}</td>
+            </tr>
+            <tr>
+              <td> </td>
+              <td class="text-right">
+                <p>
+                  <strong>Subtotal: </strong>
+                </p>
+                <p>
+                  <strong>IVA: </strong>
+                </p></td>
+              <td class="text-center">
+                <p>
+                  <strong>{{dataBuy.subtotal | currency: '¢'}}</strong>
+                </p>
+                <p>
+                  <strong>{{dataBuy.iva | currency: '¢'}}</strong>
+                </p></td>
+            </tr>
+            <tr>
+              <td> </td>
+              <td class="text-right"><h4><strong>Total: </strong></h4></td>
+              <td class="text-center text-danger"><h4><strong>{{dataBuy.total | currency: '¢'}}</strong></h4></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="col-12 text-center">
+          <qrcode [qrdata]="myAngularxQrCode" [width]="256" [errorCorrectionLevel]="'M'" [elementType]="'svg'"></qrcode>
+        </div>
+      </div>
+      <div class="col-12">
+        <p>
+          <em><b>Versión:</b> 4.3</em>
+        </p>
+        <p>
+          <em><b>Moneda:</b> CRC</em>
+        </p>
+        <p>
+          <em><b>Tipo de cambio:</b> 1</em>
+        </p>
+        <p>
+          <em><b>Medio de pago:</b> Tarjeta</em>
+        </p>
+        <p>
+          <em>Autorizada mediante resolución No DGT-R-033-2019 del 20 de junio de 2019</em>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="col-10">
+  <button *ngIf="!print" type="button" class="btn btn-success btn-lg btn-block" (click)="openPdf()">
+    Descargar comprobante
+  </button>
+</div>
+<div class="col-10 mt-4">
+  <button *ngIf="showSend" type="button" class="btn btn-success btn-lg btn-block" (click)="generatePdf()">
+    Reenviar al correo electronico
+  </button>
+</div>

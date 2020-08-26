@@ -1,0 +1,107 @@
+ <section *ngIf="showContent" class="topMembers py-5">
+  <div class="container mb-5">
+    <nav class="" aria-label="breadcrumb">
+      <ol class="breadcrumb pl-0 justify-content-center">
+        <li class="breadcrumb-item">
+          <a routerLink="/home">Inicio</a>
+        </li>
+        <li class="breadcrumb-item">
+          <a routerLink="/cartelera">Peliculas</a>
+        </li>
+        <li class="active breadcrumb-item" aria-current="page">{{serverResponse.name}}</li>
+      </ol>
+    </nav>
+    <div class="p-2 mb-2 bg-info text-white">
+      <div class="img-cont">
+        <img class="img-pro" [src]="moviesPath+serverResponse.img_src_bd" [alt]="serverResponse.name">
+      </div>
+    </div>
+    <div class="w-100 text-center posTitle">
+      <div class="adj py-1 px-4">
+        <h1 class="my-2">{{serverResponse.name}}</h1>
+      </div>
+    </div>
+  </div>
+  <div class="container mt-5">
+    <div class="row p-3">
+      <div class="col-md-5 col-lg-4">
+        <span class="fa-layers fa-fw fa-3x icon-classification" title={{serverResponse.classification.name}}>
+          <i class="fas fa-certificate"></i>
+          <span class="fa-layers-text fa-inverse" data-fa-transform="shrink-11.5 rotate--30" style="font-weight:900; font-size:1.5em;">{{serverResponse.classification.code}}</span>
+        </span>
+        <img class="img-thumbnail" [src]="moviesPath+serverResponse.img_src" [alt]="serverResponse.name">
+      </div>
+      <div class="col-md-7 col-lg-8">
+        <div class="mb-3 row">
+          <div class="col-12 text-justify"><em>{{serverResponse.resume}}</em></div>
+        </div>
+        <div class="mb-3 row">
+          <div class="col-md-5 col-lg-3"><b>Sipnosis</b></div>
+          <div class="col-md-8 col-lg-9 text-justify"><em>{{serverResponse.synopsis}}</em></div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="mb-3 row">
+          <p class="col-md-4 col-lg-3"><b>Categoria:</b></p>
+          <p class="col-md-8 col-lg-9 text-justify"><em *ngFor="let gender of serverResponse.genres">{{gender.name}}, </em></p>
+        </div>
+        <div class="clearfix"></div>
+        <div class="mb-3 row">
+          <p class="col-md-4 col-lg-3"><b>Clasificación:</b></p>
+          <p class="col-md-8 col-lg-9 text-justify"><em><b>{{serverResponse.classification.name}} </b> {{ serverResponse.classification.description }} </em></p>
+          <div class="col-md-12 text-right">
+            <div class="row">
+              <app-rating class="mb-3 text-body col-md-4" [to_rating]="'movie'" [code]="serverResponse.id" [ranking]="serverResponse.ranking_sum"
+                [votes]="serverResponse.ranking_count"></app-rating>
+              <div class="col-md-4 text-center">
+                <div class="bottomPos">
+                  <a *ngIf="serverResponse.facebook_id!='' && serverResponse.facebook_id != null" (click)="goToLink('face', serverResponse)" class="btn
+                    btn-facebook text-nowrap mr-1" title="Ir a la cuenta de Facebook">
+                    <i class="fab fa-facebook-f"></i>
+                  </a>
+                  <a *ngIf="serverResponse.instagram_id!='' && serverResponse.instagram_id != null" (click)="goToLink('inst', serverResponse)" class="btn
+                    btn-instagram text-nowrap mr-1" title="Ir a la cuenta de Instagram">
+                    <i class="fab fa-instagram"></i>
+                  </a>
+                  <a *ngIf="serverResponse.twitter_id!='' && serverResponse.twitter_id != null" (click)="goToLink('twit', serverResponse)" class="btn
+                    btn-twitter text-nowrap mr-1" title="Ir a la cuenta de Twitter">
+                    <i class="fab fa-twitter"></i>
+                  </a>
+                  <a *ngIf="serverResponse.site!='' && serverResponse.site != null" (click)="goToLink('page', serverResponse)" class="btn
+                    btn-info text-nowrap mr-1 text-white" title="Ir al Sitio Web">
+                    <i class="fas fa-link"></i>
+                  </a>
+                </div>
+              </div>
+              <div class="mt-0 mb-0 col-md-4">
+                <button *ngIf="serverResponse.trailer != null && serverResponse.trailer!==''" type="button" class="btn btn-outline-success btn-sm mr-2 col-12 mt-3"
+                  data-toggle="modal" data-target="#movie-preview"
+                  (click)="viewTrailer(serverResponse)">
+                  <i class="fas fa-film"></i>
+                  &nbsp;&nbsp; Ver Trailer
+                </button>
+                <button *ngIf="serverResponse.teaser != null && serverResponse.teaser!==''" type="button" class="btn btn-outline-info btn-sm col-12 mt-3" data-toggle="modal"
+                  data-target="#movie-preview"
+                  (click)="viewTeaser(serverResponse)">
+                  <i class="fas fa-video"></i>
+                  &nbsp;&nbsp; Ver Teaser
+                </button>
+                <button type="button" class="btn btn-outline-success btn-sm mr-2 col-12 mt-3" [routerLink]="['/ubicaciones']">
+                  <i class="fas fa-map-marked"></i>
+                  &nbsp;&nbsp;
+                  Ver las ubicaciones
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12">
+        <button type="button" class="btn btn-outline-primary btn-lg btn-block mt-4" (click)="backPage()">
+          <i class="fas fa-film"></i>
+          &nbsp;&nbsp;
+          Volver a la lista de peliculas
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
